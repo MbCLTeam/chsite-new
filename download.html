@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="CoffeeHub Team">
     <title>Download | CoffeeHub</title>
+    <!-- Font Awesome - CDN Cloudflare -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -245,6 +246,13 @@
             gap: 5px;
         }
         
+        /* Fallback para ícones caso o Font Awesome não carregue */
+        .icon-fallback {
+            display: inline-block;
+            width: 12px;
+            text-align: center;
+        }
+        
         .loading-state {
             text-align: center;
             padding: 20px;
@@ -377,14 +385,17 @@
                     </div>
                     <div class="dropdown-options" id="dropdownOptions">
                         <div class="loading-state">
-                            <i class="fas fa-spinner fa-spin"></i> Carregando versões...
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                            <span class="icon-fallback" style="display: none;">⟳</span>
+                            Carregando versões...
                         </div>
                     </div>
                 </div>
             </div>
             
             <a id="download-button" href="#" class="download-btn" style="opacity: 0.5; pointer-events: none;">
-                <i class="fas fa-download"></i>
+                <i class="fas fa-download" aria-hidden="true"></i>
+                <span class="icon-fallback" style="display: none;">⬇</span>
                 <span>Carregando...</span>
             </a>
         </div>
@@ -396,6 +407,32 @@
     </div>
 
     <script>
+        // Função para verificar se o Font Awesome carregou
+        function checkFontAwesome() {
+            const testElement = document.createElement('i');
+            testElement.className = 'fas fa-home';
+            testElement.style.position = 'absolute';
+            testElement.style.left = '-9999px';
+            document.body.appendChild(testElement);
+            
+            const styles = window.getComputedStyle(testElement);
+            const fontFamily = styles.getPropertyValue('font-family');
+            
+            document.body.removeChild(testElement);
+            
+            // Se Font Awesome não carregou, mostrar fallbacks
+            if (!fontFamily.includes('Font Awesome')) {
+                const icons = document.querySelectorAll('i.fas, i.far, i.fab');
+                icons.forEach(icon => {
+                    icon.style.display = 'none';
+                    const fallback = icon.nextElementSibling;
+                    if (fallback && fallback.classList.contains('icon-fallback')) {
+                        fallback.style.display = 'inline-block';
+                    }
+                });
+            }
+        }
+
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 25;
@@ -422,9 +459,13 @@
             const errorContainer = document.getElementById('errorContainer');
             errorContainer.innerHTML = `
                 <div class="error-state">
-                    <i class="fas fa-exclamation-triangle"></i> ${message}
+                    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                    <span class="icon-fallback" style="display: none;">⚠</span>
+                    ${message}
                 </div>
             `;
+            // Verificar Font Awesome após adicionar o ícone
+            setTimeout(checkFontAwesome, 100);
         }
 
         async function loadVersions() {
@@ -459,15 +500,23 @@
                     option.innerHTML = `
                         <div class="option-main">${version.name}</div>
                         <div class="option-details">
-                            <div class="option-date"><i class="far fa-clock"></i> ${version.releaseDate}</div>
-                            <div class="option-size"><i class="fas fa-hdd"></i> ${version.size}</div>
+                            <div class="option-date">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <span class="icon-fallback" style="display: none;">🕒</span>
+                                ${version.releaseDate}
+                            </div>
+                            <div class="option-size">
+                                <i class="fas fa-hdd" aria-hidden="true"></i>
+                                <span class="icon-fallback" style="display: none;">💾</span>
+                                ${version.size}
+                            </div>
                         </div>
                     `;
 
                     option.addEventListener('click', () => {
                         selectedText.textContent = version.name;
                         downloadButton.href = version.url;
-                        downloadButton.querySelector('span').textContent = `Baixar ${version.name}`;
+                        downloadButton.querySelector('span:last-child').textContent = `Baixar ${version.name}`;
                         downloadButton.style.opacity = '1';
                         downloadButton.style.pointerEvents = 'auto';
                         
@@ -479,11 +528,14 @@
                     dropdownOptions.appendChild(option);
                 });
 
+                // Verificar Font Awesome após adicionar os ícones
+                setTimeout(checkFontAwesome, 100);
+
                 // Selecionar a versão mais recente (latest: true ou a primeira)
                 const latestVersion = versions.find(v => v.latest) || versions[0];
                 selectedText.textContent = latestVersion.name;
                 downloadButton.href = latestVersion.url;
-                downloadButton.querySelector('span').textContent = `Baixar ${latestVersion.name}`;
+                downloadButton.querySelector('span:last-child').textContent = `Baixar ${latestVersion.name}`;
                 downloadButton.style.opacity = '1';
                 downloadButton.style.pointerEvents = 'auto';
 
@@ -516,8 +568,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             
-            // Carregar versões após um pequeno delay
+            // Verificar se Font Awesome carregou após um pequeno delay
             setTimeout(() => {
+                checkFontAwesome();
                 loadVersions();
             }, 500);
             
@@ -548,6 +601,11 @@
                     downloadCard.classList.remove('expanded');
                 }
             });
+        });
+
+        // Verificar Font Awesome quando a página carrega completamente
+        window.addEventListener('load', () => {
+            setTimeout(checkFontAwesome, 1000);
         });
     </script>
 </body>
