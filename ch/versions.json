@@ -1,0 +1,68 @@
+{
+    "versions": [
+        {
+            "version": "1.5.0",
+            "name": "CoffeeHub v1.5.0",
+            "url": "https://cdn.gruponext.online/coffeehub/1.5.0/CoffeeHub-Installer.zip",
+            "releaseDate": "10/08/2025",
+            "size": "887 KB",
+            "latest": true
+        },
+        {
+            "version": "1.4.1",
+            "name": "CoffeeHub v1.4.1",
+            "url": "https://cdn.gruponext.online/coffeehub/1.4.1/CoffeeHub-Installer.zip",
+            "releaseDate": "24/02/2025",
+            "size": "363 KB"
+        },
+        {
+            "version": "1.4.0",
+            "name": "CoffeeHub v1.4.0",
+            "url": "https://cdn.gruponext.online/coffeehub/1.4.0/CoffeeHub-Installer.zip",
+            "releaseDate": "16/02/2025",
+            "size": "367 KB"
+        },
+        {
+            "version": "1.3.0",
+            "name": "CoffeeHub v1.3.0",
+            "url": "https://cdn.gruponext.online/coffeehub/1.3.0/CoffeeHub-Installer.zip",
+            "releaseDate": "22/01/2025",
+            "size": "367 KB"
+        },
+        {
+            "version": "1.2.5",
+            "name": "CoffeeHub v1.2.5",
+            "url": "https://cdn.gruponext.online/coffeehub/1.2.5/CoffeeHub-Installer.rar",
+            "releaseDate": "04/01/2025",
+            "size": "253 KB"
+        },
+        {
+            "version": "1.2.1",
+            "name": "CoffeeHub v1.2.1",
+            "url": "https://cdn.gruponext.online/coffeehub/1.2.1/CoffeeHub-Installer.rar",
+            "releaseDate": "29/12/2024",
+            "size": "175 KB"
+        },
+        {
+            "version": "1.2.0",
+            "name": "CoffeeHub v1.2.0",
+            "url": "https://cdn.gruponext.online/coffeehub/1.2.0/CoffeeHub-Installer.zip",
+            "releaseDate": "28/12/2024",
+            "size": "236 KB"
+        },
+        {
+            "version": "1.0.0-recompiled",
+            "name": "CoffeeHub v1.0.0-recompiled",
+            "url": "https://cdn.gruponext.online/coffeehub/1.0.0-recompiled/CoffeeHub-Installer.zip",
+            "releaseDate": "24/12/2024",
+            "size": "145 KB"
+        },
+        {
+            "version": "1.0.0",
+            "name": "CoffeeHub v1.0.0",
+            "url": "https://cdn.gruponext.online/coffeehub/1.0.0/CoffeeHub-Installer.zip",
+            "releaseDate": "17/12/2024",
+            "size": "138 KB"
+        }
+    ]
+}
